@@ -36,12 +36,8 @@ public class GUI extends JPanel implements Runnable{
         }
     }
     //logik
-    int i = 0;
     public void update() throws IOException {
-        if(i%120==0){
-            System.out.println(Main.comTask.sendMessage("test"+i));
-        }
-        System.out.println("frame: "+i++);
+
     }
     //zeichnen
     public void paintComponent(Graphics g) {
@@ -49,6 +45,9 @@ public class GUI extends JPanel implements Runnable{
         Graphics2D g2 = (Graphics2D) g; //größere Lib
         g.setColor(Color.black);
         g.fillRect(0, 0, screenWidth, screenHeight);
+        g.setColor(Color.white);
+        g.drawString(Main.timer.getTime(),10,10);
+        g.drawString(Main.station,10,30);
         g2.dispose();//male
     }
 }

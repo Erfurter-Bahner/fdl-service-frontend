@@ -7,6 +7,9 @@ import java.util.Scanner;
 public class Main {
     public static String username;
     public static CommunicationTask comTask;
+    public static Timer timer = new Timer();
+
+    public static String station;
 
     static {
         try {
@@ -20,7 +23,7 @@ public class Main {
 
         System.out.print("Enter your username: ");
         username = scanner.nextLine();
-        comTask.sendMessage("POST:USER="+username);
+        station = comTask.sendMessage("POST:USER="+username);
         JFrame window = new JFrame();
         window.setUndecorated(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,7 +36,7 @@ public class Main {
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setVisible(true);
         gamePanel.start();
-
+        timer.start();
     }
 }
 
