@@ -20,6 +20,12 @@ public class GUI extends JPanel implements Runnable{
     }
     @Override
     public void run(){
+        try {
+            Main.stationinfo = Main.comTask.sendMessage("GET:STATION;"+Main.station);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(Main.stationinfo);
         //pre start
         while(true){
             try {
@@ -48,6 +54,7 @@ public class GUI extends JPanel implements Runnable{
         g.setColor(Color.white);
         g.drawString(Main.timer.getTime(),10,10);
         g.drawString(Main.station,10,30);
+        g.drawString(Main.stationinfo,10,50);
         g2.dispose();//male
     }
 }
