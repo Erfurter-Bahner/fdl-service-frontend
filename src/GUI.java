@@ -21,6 +21,7 @@ public class GUI extends JPanel implements Runnable{
     @Override
     public void run(){
         try {
+            System.out.println("getting: "+"GET:STATION;"+Main.station);
             Main.stationinfo = Main.comTask.sendMessage("GET:STATION;"+Main.station);
         } catch (IOException e) {
             throw new RuntimeException(e);
