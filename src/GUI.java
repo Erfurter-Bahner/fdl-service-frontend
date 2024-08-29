@@ -20,13 +20,6 @@ public class GUI extends JPanel implements Runnable{
     }
     @Override
     public void run(){
-        try {
-            System.out.println("getting: "+"GET:STATION;"+Main.station);
-            Main.stationinfo = Main.comTask.sendMessage("GET:STATION;"+Main.station);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        System.out.println(Main.stationinfo);
         //pre start
         while(true){
             try {
@@ -54,8 +47,30 @@ public class GUI extends JPanel implements Runnable{
         g.fillRect(0, 0, screenWidth, screenHeight);
         g.setColor(Color.white);
         g.drawString(Main.timer.getTime(),10,10);
-        g.drawString(Main.station,10,30);
-        g.drawString(Main.stationinfo,10,50);
+        g.drawString(Main.halteart+": "+Main.station+"; Gleise: "+Main.gleise,10,30);
+        drawDestinationStrings(g);
         g2.dispose();//male
+    }
+
+    private void drawDestinationStrings(Graphics g) {
+        switch(Main.destinationStations.length){
+            case 2:
+                g.drawString(Main.destinationStations[0],20,screenHeight/2);
+                g.drawString(Main.destinationStations[1], screenWidth-50, screenHeight/2);
+                break;
+            case 3:
+                g.drawString(Main.destinationStations[0],20,screenHeight/2);
+                g.drawString(Main.destinationStations[1],screenWidth/2,20);
+                g.drawString(Main.destinationStations[2], screenWidth-50, screenHeight/2);
+                break;
+            case 4:
+                g.drawString(Main.destinationStations[0],20,screenHeight/2);
+                g.drawString(Main.destinationStations[1],screenWidth/2,20);
+                g.drawString(Main.destinationStations[2], screenWidth-50, screenHeight/2);
+                g.drawString(Main.destinationStations[1],screenWidth/2,screenHeight-50);
+                break;
+            default:
+                break;
+        }
     }
 }

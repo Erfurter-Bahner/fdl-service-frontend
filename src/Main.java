@@ -3,13 +3,18 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static java.lang.Integer.parseInt;
+
 
 public class Main {
     public static String username;
     public static CommunicationTask comTask;
     public static Timer timer = new Timer();
     public static String stationinfo = "";
-    public static String station;
+    public static String station = "";
+    public static int gleise = 0;
+    public static String halteart = "";
+    public static String[] destinationStations = {};
 
     static {
         try {
@@ -38,6 +43,20 @@ public class Main {
         gamePanel.start();
         timer.start();
         Thread.sleep(100);
+        try {
+            stationinfo = comTask.sendMessage("GET:STATION;"+Main.station);
+            System.out.println(stationinfo);
+            processingstationinfo(stationinfo);
+        } catch (IOException e) {
+            System.out.println("error getting stationinfo");
+        }
+    }
+
+    private static void processingstationinfo(String stationinfo) {
+        String split[] = stationinfo.split(";");
+        gleise = parseInt(split[1]);
+        destinationStations = split[3].split(",");
+        halteart = split[2];
     }
 }
 
@@ -46,7 +65,6 @@ class CommunicationTask {
 
     CommunicationTask(String adress, int Port) throws IOException {
         client = new Client("localhost", 12345); // Replace with your server address and port
-
     }
     public String sendMessage(String msg) throws IOException{
         // Example of sending a message
