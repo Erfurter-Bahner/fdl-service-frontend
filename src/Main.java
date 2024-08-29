@@ -8,7 +8,7 @@ public class Main {
     public static String username;
     public static CommunicationTask comTask;
     public static Timer timer = new Timer();
-
+    public static String stationinfo = "";
     public static String station;
 
     static {
@@ -18,7 +18,7 @@ public class Main {
             throw new RuntimeException(e);
         }
     }
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Enter your username: ");
@@ -37,6 +37,7 @@ public class Main {
         window.setVisible(true);
         gamePanel.start();
         timer.start();
+        Thread.sleep(100);
     }
 }
 

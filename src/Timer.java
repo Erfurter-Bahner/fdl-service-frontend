@@ -13,7 +13,6 @@ public class Timer extends Thread{
             String request;
             try {
                 request = Main.comTask.sendMessage("GET:TIME");
-                System.out.println("req:"+request);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
