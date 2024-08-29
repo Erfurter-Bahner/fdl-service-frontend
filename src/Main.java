@@ -15,6 +15,8 @@ public class Main {
     public static int gleise = 0;
     public static String halteart = "";
     public static String[] destinationStations = {};
+    public static String rowsString = "";
+    public static int[][] layout = {};
 
     static {
         try {
@@ -57,6 +59,19 @@ public class Main {
         gleise = parseInt(split[1]);
         destinationStations = split[3].split(",");
         halteart = split[2];
+        rowsString = split[4];
+        System.out.println(split[4]);
+        String[] rowsArray = split[4].split(":");
+        int[][] tilelayout = new int[10][10];
+        for(int i = 0; i<rowsArray.length;i++){
+            String[] currentcells = rowsArray[i].split(",");
+            for(int j=0;j< currentcells.length;j++){
+                tilelayout[i][j] = parseInt(currentcells[j]);
+                System.out.print(" "+currentcells[j]);
+            }
+            System.out.println();
+        }
+        layout = tilelayout;
     }
 }
 

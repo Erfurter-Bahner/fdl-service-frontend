@@ -10,6 +10,8 @@ public class GUI extends JPanel implements Runnable{
     int screenWidth = 1920;
     int screenHeight = 1080;
     BufferedImage schienePNG = null;
+    public static BufferedImage[] imagearr = null;
+
     public GUI() throws IOException {
 //        this.addKeyListener(keyH);
 //        this.addMouseListener(MouseH);
@@ -25,7 +27,22 @@ public class GUI extends JPanel implements Runnable{
     @Override
     public void run(){
         try {
-            schienePNG = ImageIO.read(new File("Schiene.png"));
+            BufferedImage nullPNG = ImageIO.read(new File("0.png"));
+            BufferedImage onePNG = ImageIO.read(new File("-Schiene.png"));
+            BufferedImage twoPNG = ImageIO.read(new File("ISchiene.png"));
+            BufferedImage threePNG = ImageIO.read(new File("NordOstWeiche.png"));
+            BufferedImage fourPNG = ImageIO.read(new File("NordWestWeiche.png"));
+            BufferedImage fivePNG = ImageIO.read(new File("SuedOstWeiche.png"));
+            BufferedImage sixPNG = ImageIO.read(new File("SuedWestWeiche.png"));
+            imagearr = new BufferedImage[]{
+                    nullPNG,
+                    onePNG,
+                    twoPNG,
+                    threePNG,
+                    fourPNG,
+                    fivePNG,
+                    sixPNG
+            };
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -61,9 +78,23 @@ public class GUI extends JPanel implements Runnable{
         drawGleise(g);
         g2.dispose();//male
     }
-
     private void drawGleise(Graphics g) {
         //tiles zeichnen
+        //    westost-gleis: 1
+//    nordsüd-gleis: 2
+//    nordost-weiche: 3
+//    nordwest-weiche: 4
+//    südost-weiche: 5
+//    südwest-weiche: 6
+//      Bahnhofslayout ist in einem 10*10 layout
+//      designed. Zahlen geben die Tiles an, welche
+//      dann als 2D-Array verschickt werden, um im Frontend
+//      gezeichnet werden können.
+        for(int i = 0;i<10;i++){
+            for(int j = 0;j<10;j++){
+                g.drawImage(imagearr[Main.layout[j][i]],460+i*100,40+j*100,this);
+            }
+        }
     }
 
     private void drawDestinationStrings(Graphics g) {
