@@ -90,6 +90,7 @@ public class GUI extends JPanel implements Runnable{
 //      designed. Zahlen geben die Tiles an, welche
 //      dann als 2D-Array verschickt werden, um im Frontend
 //      gezeichnet werden können.
+        if(Main.layout.length==0) return;
         for(int i = 0;i<10;i++){
             for(int j = 0;j<10;j++){
                 g.drawImage(imagearr[Main.layout[j][i]],460+i*100,40+j*100,this);
